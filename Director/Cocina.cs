@@ -7,9 +7,9 @@ namespace Director
 {
     public class Cocina
     {
-        private HamburguesaBuilder HamburguesaNueva;
+        private static HamburguesaBuilder HamburguesaNueva;
 
-        public void pedidoHamburguesa(HamburguesaBuilder HamburguesaSolicitada)
+        public static void pedidoHamburguesa(HamburguesaBuilder HamburguesaSolicitada)
         {
           
             HamburguesaNueva = HamburguesaSolicitada;
@@ -17,14 +17,16 @@ namespace Director
             Console.WriteLine("Se registro el pedido con exito");
         }
 
-        public void prepararHamburguesa()
+        public static void prepararHamburguesa()
         {
             HamburguesaNueva.relleno();
             HamburguesaNueva.pan();
             HamburguesaNueva.precio();
+            HamburguesaNueva.tamanio();
+            HamburguesaNueva.nombre();
         }
 
-        public Hamburguesa construirHamburguesa() => HamburguesaNueva.obtenerHamburguesa();
+        public static Hamburguesa construirHamburguesa() => HamburguesaNueva.obtenerHamburguesa();
 
     }
 }

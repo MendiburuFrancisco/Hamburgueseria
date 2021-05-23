@@ -16,7 +16,11 @@ namespace BuilderConcreto
             //precio();
             tamanio();
         }
-      
+        
+        public void nombre()
+        {
+            normal.nombre = "Generica";
+        }
         public void relleno()
         {
             normal.relleno = "lechuga + tomate + carne + panceta";

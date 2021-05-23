@@ -14,30 +14,22 @@ namespace Hamburgueseria
             
              
             var Pedidos = new List<Hamburguesa>();
+           // mostrarHamburguesas(Pedidos);
             int seleccionarComida = menu();
             Hamburguesa hamburguesaPreparada = pedirComida(seleccionarComida);
-           
-            
-
+            Pedidos.Add(hamburguesaPreparada);
  
+            mostrarHamburguesas(Pedidos);
+ 
+
         }
 
-        static Hamburguesa nuevoPedido()
-        {
-            Cocina nuevaCocina = new Cocina();
-
-            nuevaCocina.pedidoHamburguesa(new Generica());
-            nuevaCocina.prepararHamburguesa();
-            return nuevaCocina.construirHamburguesa();
-        }
-
-        static Hamburguesa nuevoPedido(string pan, string relleno, string tamanio, int precio)
-        {
-            Hamburguesa HamburguesaPersonalizada = new Hamburguesa(pan, relleno, tamanio, precio+50);
-
-            return HamburguesaPersonalizada;
-        }
-
+        static Hamburguesa nuevoPedido(HamburguesaBuilder nueva)
+        { 
+            Cocina.pedidoHamburguesa(nueva);
+            Cocina.prepararHamburguesa();
+            return Cocina.construirHamburguesa();
+        } 
         static int menu()
         {
             Console.WriteLine("Bienvenido a la hamburguesaria");
@@ -47,11 +39,8 @@ namespace Hamburgueseria
             int op = -1; 
             while(op < 0 | op > 2)
             {
-                Console.WriteLine("Seleccionar Opcion: ");
-
-                op = int.Parse(Console.ReadLine());
-
-
+                Console.WriteLine("Seleccionar Opcion: "); 
+                op = int.Parse(Console.ReadLine()); 
             }
 
             return op;
@@ -59,35 +48,55 @@ namespace Hamburgueseria
         static Hamburguesa pedirComida(int comidaSeleccionada)
         {
             Hamburguesa nuevaHamburguesa = new Hamburguesa();
+         
 
             switch (comidaSeleccionada)
             {
-                case 1: nuevaHamburguesa  = carta(); break;
+                case 1:  
+                        if(carta() == 1)
+                    {
+                        nuevaHamburguesa = nuevoPedido(new Generica());
+                     }
+
+                    break;
+
+                case 2:
+
+                    nuevaHamburguesa = nuevoPedido(new Personalizada());
+
+
+                    break;
 
             }
 
             return nuevaHamburguesa;
         }
-        static Hamburguesa carta()
+        static int carta()
         {
-            Hamburguesa hambPedida = new Hamburguesa;
             int seleccionComida = 0;
             Console.WriteLine("Carta");
             Console.WriteLine("1 - Generica");
 
             Console.WriteLine("Ingresar seleccion");
             seleccionComida = int.Parse(Console.ReadLine());
-            
-            if(seleccionComida == 1) 
-            {
-                hambPedida = nuevoPedido();
-            }
-
-            return hambPedida;
+          
+            return seleccionComida;
         }
 
-        static void mostrarHamburguesa(Hamburguesa nueva)
+        static void mostrarHamburguesas(List<Hamburguesa> listaCreada)
         {
+            Hamburguesa ham;
+            Console.WriteLine();
+            Console.WriteLine("---Lista de Hamburguesas----");
+            foreach (var Hamburguesas in listaCreada)
+            {
+                  ham = (Hamburguesa)Hamburguesas;
+
+                ham.obtenerHamburguesa();
+
+            }
+
+            Console.WriteLine("--------------------------");
 
         }
 
