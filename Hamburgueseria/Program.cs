@@ -11,20 +11,24 @@ namespace Hamburgueseria
     {
         static void Main(string[] args)
         {
-            
-             
             var Pedidos = new List<Hamburguesa>();
-           // mostrarHamburguesas(Pedidos);
+    
             int seleccionarComida = menu();
-            Hamburguesa hamburguesaPreparada = pedirComida(seleccionarComida);
-            Pedidos.Add(hamburguesaPreparada);
+            while(seleccionarComida != 3)
+            {
+                Hamburguesa hamburguesaPreparada = crearHamburguesa(seleccionarComida);
+                Pedidos.Add(hamburguesaPreparada);
+                Console.Clear();
  
-            mostrarHamburguesas(Pedidos);
- 
+                mostrarHamburguesas(Pedidos);
+
+                seleccionarComida = menu();
+            }
+       
 
         }
 
-        static Hamburguesa nuevoPedido(HamburguesaBuilder nueva)
+        static Hamburguesa cocinarHamburguesa(HamburguesaBuilder nueva)
         { 
             Cocina.pedidoHamburguesa(nueva);
             Cocina.prepararHamburguesa();
@@ -33,11 +37,11 @@ namespace Hamburgueseria
         static int menu()
         {
             Console.WriteLine("Bienvenido a la hamburguesaria");
-            Console.WriteLine("1 - Ver Carta");
+            Console.WriteLine("1 - Ver Hamburguesas Hechas");
             Console.WriteLine("2 - Pedir Hamburguesa a gusto");
-            
+            Console.WriteLine("3 - Salir");
             int op = -1; 
-            while(op < 0 | op > 2)
+            while(op < 0 | op > 3)
             {
                 Console.WriteLine("Seleccionar Opcion: "); 
                 op = int.Parse(Console.ReadLine()); 
@@ -45,24 +49,23 @@ namespace Hamburgueseria
 
             return op;
         }
-        static Hamburguesa pedirComida(int comidaSeleccionada)
+        static Hamburguesa crearHamburguesa(int comidaSeleccionada)
         {
-            Hamburguesa nuevaHamburguesa = new Hamburguesa();
-         
+            Hamburguesa nuevaHamburguesa = new Hamburguesa(); 
 
             switch (comidaSeleccionada)
             {
                 case 1:  
                         if(carta() == 1)
                     {
-                        nuevaHamburguesa = nuevoPedido(new Generica());
+                        nuevaHamburguesa = cocinarHamburguesa(new Generica());
                      }
 
                     break;
 
                 case 2:
 
-                    nuevaHamburguesa = nuevoPedido(new Personalizada());
+                    nuevaHamburguesa = cocinarHamburguesa(new Personalizada());
 
 
                     break;

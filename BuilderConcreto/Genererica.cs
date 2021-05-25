@@ -9,14 +9,6 @@ namespace BuilderConcreto
         private Hamburguesa normal = new Hamburguesa();
         string[] tamanioH = { "normal", "medio", "grande" };
 
-        public Generica()
-        {
-            //pan();
-            //relleno();
-            //precio();
-            tamanio();
-        }
-        
         public void nombre()
         {
             normal.nombre = "Generica";
@@ -62,8 +54,4 @@ namespace BuilderConcreto
     }
 }
 
-
-//selecciona un nombre que defina la representación del objeto a crear. 
-//implementa la clase abstracta  Builder
-//cconstruye y ensambla las partes del producto.
-//ejemplo en c#: clase BuilderPizzaHawaiana : BuilderPizza
+ 
